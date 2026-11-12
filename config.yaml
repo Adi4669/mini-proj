@@ -1,0 +1,113 @@
+filters:
+  # Target: Third-year CSE student, suitable for internships,
+  # graduate roles, junior software engineering and entry-level positions.
+  #
+  # Primary focus:
+  # Backend development, full-stack development, Python,
+  # JavaScript/Node.js, React, APIs, databases and AI applications.
+
+  include_titles:
+    # Core software engineering roles
+    - '\bsoftware engineer\b'
+    - '\bsoftware engineering\b'
+    - '\bsoftware development engineer\b'
+    - '\bsoftware developer\b'
+    - '\bapplication developer\b'
+    - '\bapplication engineer\b'
+    - '\bweb developer\b'
+    - '\bweb application engineer\b'
+
+    # SDE / SWE positions
+    - '\b(sde|swe)\b'
+    - '\b(sde|swe)\s*-?\s*(i{1,3}|[123])\b'
+
+    # Backend development
+    - '\bbackend\b.*\b(engineer|developer)\b'
+    - '\bback-end\b.*\b(engineer|developer)\b'
+    - '\b(engineer|developer)\b.*\b(backend|back-end)\b'
+    - '\bapi\s+(software\s+)?(engineer|developer)\b'
+    - '\b(engineer|developer)\b.*\bapi\b'
+
+    # Full-stack development
+    - '\bfull[- ]?stack\b.*\b(engineer|developer)\b'
+    - '\b(engineer|developer)\b.*\bfull[- ]?stack\b'
+
+    # Frontend / React.js development
+    - '\bfrontend\b.*\b(engineer|developer)\b'
+    - '\bfront-end\b.*\b(engineer|developer)\b'
+    - '\breact(\.js)?\b.*\b(engineer|developer)\b'
+    - '\b(engineer|developer)\b.*\breact(\.js)?\b'
+
+    # Python development
+    - '\bpython\b.*\b(engineer|developer)\b'
+    - '\b(engineer|developer)\b.*\bpython\b'
+
+    # JavaScript / Node.js development
+    - '\b(node\.?js|javascript)\b.*\b(engineer|developer)\b'
+    - '\b(engineer|developer)\b.*\b(node\.?js|javascript)\b'
+
+    # AI-integrated software development
+    - '\b(ai|artificial intelligence)\b.*\b(application|software)\b.*\b(engineer|developer)\b'
+    - '\b(ai application|ai software)\s+(engineer|developer)\b'
+
+    # Cloud / application engineering
+    - '\bcloud\s+(software\s+)?(engineer|developer)\b'
+
+    # Entry-level and graduate positions
+    - '\bgraduate\s+(software\s+)?engineer\b'
+    - '\b(associate|junior)\s+(software|backend|full[- ]?stack)\s+(engineer|developer)\b'
+    - '\bentry[- ]level\s+(software|backend|full[- ]?stack)\s+(engineer|developer)\b'
+
+    # Relevant internships and graduate training programmes
+    - '\b(intern|internship|apprentice|trainee)\b.*\b(software|engineering|developer|development|backend|full[- ]?stack|frontend|react|python|node\.?js|ai|cloud)\b'
+    - '\b(software|engineering|developer|development|backend|full[- ]?stack|frontend|react|python|node\.?js|ai|cloud)\b.*\b(intern|internship|apprentice|trainee)\b'
+
+    # Member of Technical Staff roles
+    - '\bmember of technical staff\b'
+
+  exclude_titles:
+    # Exclude roles beyond current experience level
+    - '\b(staff|principal|distinguished|fellow|architect)\b'
+    - '\bsenior\b'
+    - '\b(lead|tech lead|team lead)\b'
+    - '\b(director|vp|vice president|head of|chief|cto)\b'
+    - '\b(manager|management)\b'
+
+    # Exclude non-development functions
+    - '\b(sales|account executive|marketing|recruit|recruiter|support|customer success|business development)\b'
+    - '\b(product manager|project manager|program manager)\b'
+
+    # Exclude unrelated engineering disciplines
+    - '\b(ios|android|mobile|game|embedded|firmware|kernel|driver|hardware)\b'
+    - '\b(data scientist|machine learning scientist|research scientist)\b'
+
+    # Exclude unrelated specialist roles
+    - '\b(qa engineer|quality assurance|manual tester|test engineer|automation tester)\b'
+    - '\b(cybersecurity analyst|security analyst|network engineer|database administrator)\b'
+  # Substrings matched against "<location> <title>", case-insensitive.
+  # Leave empty to accept every location.
+  locations:
+    - bangalore
+    - bengaluru
+    - india
+
+  # If true, anything reading as remote passes the location gate.
+  allow_remote: true
+
+  # Drop postings older than this. Set to null to disable.
+  # Boards often re-stamp `updated_at`, so this is a soft signal, not a promise.
+  max_age_days: 30
+
+# --- LLM stages -------------------------------------------------------------
+screen_batch_size: 8      # jobs per screening call. Higher = cheaper, sloppier.
+screen_jd_chars: 1400     # JD truncation for screening
+draft_jd_chars: 6000      # JD truncation for drafting
+score_threshold: 7.0      # below this, no draft and no digest slot
+max_per_digest: 5         # hard cap on expensive draft calls per run
+
+# --- paths ------------------------------------------------------------------
+companies_file: companies.yaml
+profile_file: profile.json
+seen_file: seen.json
+digest_file: out/digest.html
+tracker_csv: out/tracker.csv
